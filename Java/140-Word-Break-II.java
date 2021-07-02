@@ -37,3 +37,51 @@ class Solution {
     
     
 }
+
+// Improved a bit
+class Solution {
+    public List<String> wordBreak(String s, List<String> wordDict) {
+        List<List<String>> words = wordBreak(s, wordDict, new HashMap<>());
+        
+        List<String> answer = new ArrayList<>();
+        for(List<String> current : words) {
+            StringBuilder b = new StringBuilder();
+            for(String w : current) {
+                b.append(w);
+                b.append(" ");
+            }
+            answer.add(b.toString().trim());
+        }
+        return answer;
+    }
+    
+    public List<List<String>> wordBreak(String s, List<String> wordDict, Map<String, List<List<String>>> memo) {
+        List<List<String>> solutions = new ArrayList<>();
+        if(s.length() == 0) {
+            solutions.add(new ArrayList<>());
+            return solutions;
+        }
+        if(memo.containsKey(s)) {
+            return memo.get(s);
+        } else {
+            memo.put(s, solutions);
+        }
+        
+        for(String word : wordDict) {
+            if(s.startsWith(word)) {
+                String substring = s.substring(word.length());                
+                List<List<String>> tmp = wordBreak(substring, wordDict, memo);
+                
+                for(List<String> result : tmp) {
+                    List<String> newSentences = new ArrayList<>(result);
+                    newSentences.add(0, word);
+                    memo.get(s).add(newSentences);
+                }
+                
+            }
+        }
+        
+        return memo.get(s);
+    }
+    
+}
