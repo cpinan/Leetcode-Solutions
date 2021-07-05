@@ -31,8 +31,8 @@ public class CanConstruct extends BaseHelperClass {
 
     public static void main(String[] args) {
         CanConstruct m = new CanConstruct();
-        m.print(m.canConstruct("skateboard", new String[]{"br", "rd", "ate", "t", "ska", "sk", "boar"}));
         m.print(m.canConstruct("abcdef", new String[]{"ab", "abc", "cd", "def", "abcd"}));
+        m.print(m.canConstruct("skateboard", new String[]{"br", "rd", "ate", "t", "ska", "sk", "boar"}));
         m.print(m.canConstruct("", new String[]{"cat", "dog", "mouse"}));
     }
 }
